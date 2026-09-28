@@ -286,7 +286,8 @@
   function fitStage() {
     const { W, H } = stageSize();
     const pad = 16;
-    const aw = els.stageWrap.clientWidth - pad * 2;
+    const padLeft = parseFloat(getComputedStyle(els.stageWrap).paddingLeft) || 0;
+    const aw = els.stageWrap.clientWidth - padLeft - pad * 2;
     const ah = els.stageWrap.clientHeight - pad * 2;
     const scale = Math.max(0, Math.min(aw / W, ah / H));
     els.stage.style.width = W * scale + 'px';
