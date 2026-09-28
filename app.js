@@ -298,14 +298,14 @@
     els.undo.disabled = !past.length;
     els.redo.disabled = !future.length;
 
-    els.bgColor.value = state.bg;
+    els.bgColor.style.setProperty('--c', state.bg);
     markActive(els.bgSwatches, state.bg);
     for (const b of els.ratios.children) b.classList.toggle('is-active', b.dataset.ratio === state.ratio);
 
     const r = findRune(selectedId);
     els.toolbar.classList.toggle('is-disabled', !r);
     if (r) {
-      els.tbColor.value = r.color;
+      els.tbColor.style.setProperty('--c', r.color);
       els.tbWidth.value = r.w;
       els.tbSize.value = r.s;
       markActive(els.tbSwatches, r.color);
@@ -492,6 +492,7 @@
   }
 
   function closeMenu() {
+    ColorPicker.close();
     document.body.classList.remove('menu-open');
     els.menu.setAttribute('aria-hidden', 'true');
     els.menuBtn.setAttribute('aria-expanded', 'false');
@@ -592,8 +593,12 @@
     els.clearBtn.addEventListener('click', clearSheet);
 
     makeSwatches(els.bgSwatches, BG_SWATCHES, (c) => commit(() => (state.bg = c)));
-    els.bgColor.addEventListener('input', () => live(() => (state.bg = els.bgColor.value)));
-    els.bgColor.addEventListener('change', liveEnd);
+    els.bgColor.addEventListener('click', () =>
+      ColorPicker.toggle(els.bgColor, state.bg, {
+        onInput: (c) => live(() => (state.bg = c)),
+        onDone: liveEnd,
+      })
+    );
 
     const editSelected = (fn) => {
       const r = findRune(selectedId);
@@ -605,16 +610,25 @@
       lastColor = c;
       commit(() => (r.color = c));
     });
-    els.tbColor.addEventListener('input', () =>
-      editSelected((r) => (r.color = lastColor = els.tbColor.value))
-    );
+    els.tbColor.addEventListener('click', () => {
+      const r = findRune(selectedId);
+      if (!r) return;
+      const id = r.id;
+      ColorPicker.toggle(els.tbColor, r.color, {
+        onInput: (c) => {
+          const target = findRune(id);
+          if (target) live(() => (target.color = lastColor = c));
+        },
+        onDone: liveEnd,
+      });
+    });
     els.tbWidth.addEventListener('input', () =>
       editSelected((r) => (r.w = clamp(parseFloat(els.tbWidth.value), MIN_STROKE, MAX_STROKE)))
     );
     els.tbSize.addEventListener('input', () =>
       editSelected((r) => (r.s = clamp(parseFloat(els.tbSize.value), MIN_SIZE, MAX_SIZE)))
     );
-    for (const input of [els.tbColor, els.tbWidth, els.tbSize]) input.addEventListener('change', liveEnd);
+    for (const input of [els.tbWidth, els.tbSize]) input.addEventListener('change', liveEnd);
     els.tbDup.addEventListener('click', duplicateSelected);
     els.tbDelete.addEventListener('click', deleteSelected);
 

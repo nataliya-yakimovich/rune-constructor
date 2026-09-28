@@ -31,7 +31,7 @@
 
   <footer id="toolbar" class="toolbar is-disabled">
     <div class="tb-group">
-      <input type="color" id="tb-color" aria-label="Цвет руны" value="#000000">
+      <button type="button" id="tb-color" class="color-btn" aria-label="Свой цвет руны" title="Свой цвет"></button>
       <div class="swatches small" id="tb-swatches"></div>
     </div>
     <label class="tb-group tb-range">
@@ -62,10 +62,10 @@
       <section>
         <h2>Фон</h2>
         <div class="swatches" id="bg-swatches"></div>
-        <label class="color-field">
-          <input type="color" id="bg-color" value="#ffffff">
+        <button type="button" id="bg-color" class="color-field">
+          <span class="color-btn" aria-hidden="true"></span>
           <span>Свой цвет</span>
-        </label>
+        </button>
       </section>
 
       <section>
@@ -84,6 +84,7 @@
     </div>
   </aside>
 
+  <script src="color-picker.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
