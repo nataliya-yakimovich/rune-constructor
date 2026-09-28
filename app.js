@@ -8,9 +8,9 @@
   // так что даже при 50 рунах история занимает ~0.5 МБ из ~5 МБ localStorage.
   const HISTORY_LIMIT = 100;
   const BASE = 1000; // длинная сторона листа во внутренних единицах
-  const RATIOS = ['3:4', '2:3', '9:16', '1:1', '4:3', '3:2', '16:9'];
+  const RATIOS = ['9:21', '9:16', '2:3', '3:4', '4:5', '1:1', '5:4', '4:3', '3:2', '16:9', '21:9'];
   const DEFAULT_BG = '#ffffff';
-  const DEFAULT_RATIO = '3:4';
+  const DEFAULT_RATIO = '9:16';
   const DEFAULT_COLOR = '#000000';
   const DEFAULT_STROKE = 1.7;
   const BG_SWATCHES = ['#ffffff', '#f4ecd8', '#e6dfd1', '#c9d6df', '#2b2b2b', '#000000'];
