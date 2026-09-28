@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Конструктор рун</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button id="menu-btn" class="btn" aria-controls="menu" aria-expanded="false">
+      <span class="burger" aria-hidden="true"></span><span>Меню</span>
+    </button>
+    <div class="topbar-actions">
+      <button id="undo-btn" class="btn icon" title="Отменить (Ctrl+Z)" aria-label="Отменить">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>
+      </button>
+      <button id="redo-btn" class="btn icon" title="Вернуть (Ctrl+Y)" aria-label="Вернуть">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H10a6 6 0 0 0 0 12h3"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="stage-wrap">
+    <svg id="stage" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 1000">
+      <rect id="stage-bg" x="0" y="0" width="750" height="1000" fill="#ffffff"/>
+      <g id="rune-layer"></g>
+      <g id="overlay"></g>
+    </svg>
+  </main>
+
+  <footer id="toolbar" class="toolbar is-disabled">
+    <div class="tb-group">
+      <input type="color" id="tb-color" aria-label="Цвет руны" value="#000000">
+      <div class="swatches small" id="tb-swatches"></div>
+    </div>
+    <label class="tb-group tb-range">
+      <span>Толщина</span>
+      <input type="range" id="tb-width" min="0.3" max="5" step="0.1" value="1.7">
+    </label>
+    <label class="tb-group tb-range">
+      <span>Размер</span>
+      <input type="range" id="tb-size" min="0.04" max="1.5" step="0.01" value="0.3">
+    </label>
+    <div class="tb-group">
+      <button id="tb-dup" class="btn">Копия</button>
+      <button id="tb-delete" class="btn danger">Удалить</button>
+    </div>
+  </footer>
+
+  <div id="backdrop" class="backdrop"></div>
+
+  <aside id="menu" class="menu" aria-hidden="true">
+    <div class="menu-head">
+      <button id="export-btn" class="btn primary">Сохранить в PNG</button>
+      <button id="menu-close" class="btn icon" aria-label="Закрыть меню">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="menu-body">
+      <section>
+        <h2>Фон</h2>
+        <div class="swatches" id="bg-swatches"></div>
+        <label class="color-field">
+          <input type="color" id="bg-color" value="#ffffff">
+          <span>Свой цвет</span>
+        </label>
+      </section>
+
+      <section>
+        <h2>Соотношение сторон</h2>
+        <div class="ratios" id="ratios"></div>
+      </section>
+
+      <section>
+        <h2>Руны</h2>
+        <ul id="rune-list" class="rune-list"></ul>
+      </section>
+    </div>
+
+    <div class="menu-foot">
+      <button id="clear-btn" class="btn danger wide">Очистить лист</button>
+    </div>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>

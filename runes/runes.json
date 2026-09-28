@@ -1,0 +1,7 @@
+[
+  { "id": "kenaz",  "name": "Кеназ",  "file": "kenaz.svg" },
+  { "id": "ansuz",  "name": "Ансуз",  "file": "ansuz.svg" },
+  { "id": "mannaz", "name": "Манназ", "file": "mannaz.svg" },
+  { "id": "fehu",   "name": "Феху",   "file": "fehu.svg" },
+  { "id": "jera",   "name": "Йера",   "file": "jera.svg" }
+]
